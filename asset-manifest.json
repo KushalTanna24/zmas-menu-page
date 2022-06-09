@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/zmas-menu-page/static/css/main.073c9b0a.css",
+    "main.js": "/zmas-menu-page/static/js/main.dd49a7ec.js",
+    "index.html": "/zmas-menu-page/index.html",
+    "main.073c9b0a.css.map": "/zmas-menu-page/static/css/main.073c9b0a.css.map",
+    "main.dd49a7ec.js.map": "/zmas-menu-page/static/js/main.dd49a7ec.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.dd49a7ec.js"
+  ]
+}
