@@ -1,47 +1,66 @@
 import React, { Fragment } from "react";
 import Data from "../../Data/Data";
-import _ from "lodash";
+import groupBy from "lodash/groupBy";
 import MealCard from "./MealCard";
 
-const MealList = () => {
-  const itemArray = Data.items;
+const MealList = (props) => {
+  const { categories, items: itemArray } = Data;
 
-  const grouppedItems = _.groupBy(itemArray, "restaurant_category_id");
+  const grouppedCategories = groupBy(categories, "restaurant_category_id");
 
-  const mapped = Object.keys(grouppedItems).map((item) => {
+  const grouppedItems = groupBy(itemArray, "restaurant_category_id");
+  console.log(grouppedItems);
+
+  const filteredItems = Object.keys(grouppedItems).map((ID) => {
+    const filteredItem = grouppedItems[ID].filter((item) => {
+      return (
+        item.restaurant_category_name
+          .toLowerCase()
+          .includes(props.searchTerm.toLowerCase()) ||
+        item.item_name.toLowerCase().includes(props.searchTerm.toLowerCase())
+      );
+    });
+
     return (
-      <Fragment key={item}>
-        <div className="col-md-6">
-          <h2 align="left" style={{ color: "#007bff" }}>
-            {grouppedItems[item][0].restaurant_category_name}
-          </h2>
-          <br />
-          {grouppedItems[item].map((item) => {
+      <Fragment key={ID}>
+        <div className="row">
+          <div className="col-md-12">
+            <h3>
+              {filteredItem.length > 0 &&
+                grouppedCategories[ID][0].restaurant_category_name}
+            </h3>
+          </div>
+        </div>
+        <div className="row">
+          {filteredItem.map((item) => {
+            const image =
+              item.image_thumbnail_url === ""
+                ? "https://monophy.com/media/dLmEzHozhc9WbTkwPa/monophy.gif"
+                : item.image_thumbnail_url;
             return (
               <MealCard
                 key={item.item_id}
-                img={item.image_thumbnail_url}
+                img={image}
                 title={item.item_name}
                 price={item.item_price}
               />
             );
           })}
-          <br />
         </div>
       </Fragment>
     );
   });
 
-  //   .map((item) => {
-  //     return (
-  //       <MealCard
-  //         key={item.item_id}
-  //         title={item.item_name}
-  //         img={item.image_thumbnail_url}
-  //         price={item.item_amount}
-  //       />
-  //     );
-  //   });
+  // .map((item) => {
+  //   return (
+  //     <MealCard
+  //       key={item.item_id}
+  //       title={item.item_name}
+  //       img={item.image_thumbnail_url}
+  //       price={item.item_amount}
+  //     />
+  //   );
+  // });
 
   //   return (
   //     <MealCard
@@ -62,7 +81,7 @@ const MealList = () => {
   //       />
   //     );
   //   });
-  return <Fragment>{mapped}</Fragment>;
+  return <Fragment>{filteredItems}</Fragment>;
 };
 
 export default MealList;

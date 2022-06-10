@@ -36,7 +36,7 @@ const Data = {
       restaurant_category_name: "Juices",
       ordering_rank: "4",
     },
-  ],
+   ],
   items: [
     {
       restaurant_category_id: "4171",

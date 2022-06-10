@@ -1,8 +1,12 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
+  };
+
+  const inputChangeHandler = (event) => {
+    props.onSearchChange(event.target.value);
   };
 
   return (
@@ -14,6 +18,7 @@ const Navbar = () => {
             type="search"
             placeholder="Search"
             aria-label="Search"
+            onChange={inputChangeHandler}
           />
           <button
             className="btn btn-outline-success my-2 my-sm-0"

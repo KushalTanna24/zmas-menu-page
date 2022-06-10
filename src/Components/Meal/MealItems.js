@@ -2,7 +2,7 @@ import React from "react";
 import Category from "../Categories/Category";
 import MealList from "./MealList";
 
-const MealItems = () => {
+const MealItems = (props) => {
   return (
     <div className="row">
       {/* Starts the body part */}
@@ -15,7 +15,7 @@ const MealItems = () => {
 
       {/* Right Div */}
       <div className="col-md-10">
-        <MealList />
+        <MealList searchTerm={props.passSearchTerm} />
       </div>
     </div>
   );
