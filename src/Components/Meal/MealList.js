@@ -8,8 +8,11 @@ const MealList = (props) => {
 
   const grouppedCategories = groupBy(categories, "restaurant_category_id");
 
+  const ClickHandler = (event) => {
+    console.log(event.target.offsetParent.id);
+  };
+
   const grouppedItems = groupBy(itemArray, "restaurant_category_id");
-  console.log(grouppedItems);
 
   const filteredItems = Object.keys(grouppedItems).map((ID) => {
     const filteredItem = grouppedItems[ID].filter((item) => {
@@ -23,8 +26,18 @@ const MealList = (props) => {
 
     return (
       <Fragment key={ID}>
+        {/* {console.log("this", grouppedItems[ID][0].restaurant_category_id)} */}
+        {/* {console.log(ID)} */}
         <div className="row">
-          <div className="col-md-12">
+          <div
+            className="col-md-12"
+            id={
+              filteredItem.length > 0
+                ? grouppedCategories[ID][0].restaurant_category_identity
+                : ""
+            }
+            onClick={ClickHandler}
+          >
             <h3>
               {filteredItem.length > 0 &&
                 grouppedCategories[ID][0].restaurant_category_name}

@@ -9,7 +9,7 @@ const MealItems = (props) => {
 
       {/* beginning of category list */}
       <div className="col-md-2">
-        <Category />
+        <Category searchTerm={props.passSearchTerm} />
       </div>
       {/* end of category list */}
 
